@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Death.Syndicate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;600;700&family=Creepster&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0392b;
+    --deep-red: #7b0000;
+    --crimson: #ff2222;
+    --bone: #d4c9b0;
+    --dark: #0a0a0a;
+    --darker: #050505;
+    --mid: #111111;
+    --gray: #1a1a1a;
+    --muted: #555;
+    --purple: #7b2d8b;
+    --purple-glow: #b44fcc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--darker);
+    color: var(--bone);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(120,0,0,0.35) 0%, transparent 70%),
+      linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent, var(--darker));
+    pointer-events: none;
+  }
+
+  .hero-logo {
+    width: min(380px, 80vw);
+    height: min(380px, 80vw);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(192,57,43,0.4);
+    box-shadow:
+      0 0 60px rgba(192,57,43,0.5),
+      0 0 120px rgba(192,57,43,0.2),
+      inset 0 0 60px rgba(0,0,0,0.8);
+    animation: pulseRed 4s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes pulseRed {
+    0%, 100% { box-shadow: 0 0 60px rgba(192,57,43,0.5), 0 0 120px rgba(192,57,43,0.2); }
+    50% { box-shadow: 0 0 80px rgba(192,57,43,0.8), 0 0 160px rgba(192,57,43,0.4), 0 0 200px rgba(192,57,43,0.1); }
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.2rem, 7vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #fff 0%, #d4c9b0 40%, #c0392b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.75rem;
+    animation: fadeUp 1s 0.2s ease both;
+    z-index: 2;
+  }
+
+  .spotify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding: 0.75rem 1.8rem;
+    background: transparent;
+    border: 1px solid rgba(192,57,43,0.5);
+    color: var(--bone);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .spotify-btn:hover {
+    background: rgba(192,57,43,0.15);
+    border-color: var(--red);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(192,57,43,0.3);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(5,5,5,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(192,57,43,0.2);
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1rem 2rem;
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav a:hover { color: var(--crimson); }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.75rem;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  /* ── UPCOMING EP ── */
+  #upcoming { background: linear-gradient(180deg, var(--darker) 0%, #0d0005 50%, var(--darker) 100%); max-width: 100%; }
+
+  .ep-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .ep-art {
+    position: relative;
+  }
+
+  .ep-art img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    box-shadow:
+      0 0 80px rgba(123,45,139,0.6),
+      0 0 160px rgba(123,45,139,0.3);
+    animation: pulsePurple 4s ease-in-out infinite;
+  }
+
+  @keyframes pulsePurple {
+    0%, 100% { box-shadow: 0 0 80px rgba(123,45,139,0.6), 0 0 160px rgba(123,45,139,0.3); }
+    50% { box-shadow: 0 0 120px rgba(180,79,204,0.8), 0 0 220px rgba(180,79,204,0.4); }
+  }
+
+  .ep-badge {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .ep-info .section-label { color: var(--purple-glow); }
+
+  .ep-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0.5rem 0;
+    text-shadow: 0 0 40px rgba(180,79,204,0.5);
+  }
+
+  .ep-date {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--purple-glow);
+    margin: 1rem 0 1.5rem;
+  }
+
+  .ep-desc {
+    font-size: 1.05rem;
+    color: #888;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* countdown */
+  .countdown {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .cd-block {
+    text-align: center;
+  }
+
+  .cd-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--purple-glow);
+    display: block;
+    line-height: 1;
+  }
+
+  .cd-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  /* ── DISCOGRAPHY ── */
+  .disc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .album-card {
+    background: var(--gray);
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+
+  .album-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(192,57,43,0.2);
+    border-color: rgba(192,57,43,0.3);
+  }
+
+  .album-art {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.9);
+    transition: filter 0.3s;
+  }
+
+  .album-card:hover .album-art { filter: brightness(1); }
+
+  .album-info {
+    padding: 1.25rem;
+  }
+
+  .album-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.3rem;
+  }
+
+  .album-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .album-year {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .track-list {
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 1rem;
+  }
+
+  .track-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: color 0.2s;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    font-size: 0.75rem;
+    color: var(--muted);
+    width: 1.2rem;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .track-name {
+    font-size: 0.9rem;
+    color: #aaa;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .album-card:hover .track-name { color: #ccc; }
+
+  .track-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .track-link:hover .track-name { color: var(--crimson); }
+
+  /* ── MEMBERS ── */
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .member-card {
+    text-align: center;
+    position: relative;
+  }
+
+  .member-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid rgba(192,57,43,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    background: var(--gray);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    color: var(--red);
+    box-shadow: 0 0 30px rgba(192,57,43,0.2);
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+
+  .member-card:hover .member-avatar {
+    border-color: var(--red);
+    box-shadow: 0 0 50px rgba(192,57,43,0.5);
+  }
+
+  .member-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+
+  .member-role {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--red); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: #333;
+    letter-spacing: 0.1em;
+  }
+
+  /* divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(192,57,43,0.4), transparent);
+    margin: 0;
+  }
+
+  /* responsive */
+  @media (max-width: 768px) {
+    .ep-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .members-grid { grid-template-columns: 1fr; }
+    nav { gap: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .countdown { gap: 1rem; }
+    .cd-num { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-logo" src="256x256bb-800x800.jpg" alt="Death.Syndicate Logo">
+  <h1 class="hero-title">Death.Syndicate</h1>
+  <p class="hero-sub">CJ &nbsp;·&nbsp; Hax &nbsp;·&nbsp; Trent</p>
+  <a class="spotify-btn" href="https://open.spotify.com/artist/0lt7yivQzmpsdcZ8wKuv2M" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+    Listen on Spotify
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#upcoming">Upcoming</a>
+  <a href="#discography">Music</a>
+  <a href="#members">Members</a>
+</nav>
+
+<div class="divider"></div>
+
+<!-- UPCOMING EP -->
+<div id="upcoming">
+  <div class="ep-inner">
+    <div class="ep-art">
+      <span class="ep-badge">Coming Soon</span>
+      <img src="ChatGPT_Image_Mar_21__2026__04_21_35_PM-3000x3000.png" alt="Emo Girl EP Cover">
+    </div>
+    <div class="ep-info">
+      <p class="section-label">Upcoming EP</p>
+      <h2 class="ep-title">Emo Girl</h2>
+      <p class="ep-date">April 29, 2026</p>
+      <p class="ep-desc">
+        The next chapter from Death.Syndicate. Dark, raw, and emotionally charged —
+        <em>Emo Girl</em> is coming.
+      </p>
+      <div class="countdown">
+        <div class="cd-block">
+          <span class="cd-num" id="cd-days">--</span>
+          <span class="cd-label">Days</span>
+        </div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-hours">--</span>
+          <span class="cd-label">Hours</span>
+        </div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-mins">--</span>
+          <span class="cd-label">Mins</span>
+        </div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-secs">--</span>
+          <span class="cd-label">Secs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DISCOGRAPHY -->
+<section id="discography">
+  <p class="section-label">Releases</p>
+  <h2 class="section-title">Discography</h2>
+
+  <div class="disc-grid">
+
+    <!-- Chaos Reworked -->
+    <div class="album-card">
+      <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b273ce8e26b8ec037aa69d6c39a9" alt="Chaos Reworked">
+      <div class="album-info">
+        <p class="album-type">Album</p>
+        <h3 class="album-name">Chaos Reworked</h3>
+        <p class="album-year">2026 &nbsp;·&nbsp; 10 tracks</p>
+        <div class="track-list">
+          <div class="track-item"><span class="track-num">1</span><a class="track-link" href="https://open.spotify.com/track/4AOux5AAsgdMSb7JzXWQPX" target="_blank"><span class="track-name">Dead Inside</span></a></div>
+          <div class="track-item"><span class="track-num">2</span><a class="track-link" href="https://open.spotify.com/track/602YwKd1ORD0Q1kdy7kR6m" target="_blank"><span class="track-name">Death</span></a></div>
+          <div class="track-item"><span class="track-num">3</span><a class="track-link" href="https://open.spotify.com/track/2uVuO9b20bD9IrFlxhPFaR" target="_blank"><span class="track-name">GheistChild</span></a></div>
+          <div class="track-item"><span class="track-num">4</span><a class="track-link" href="https://open.spotify.com/track/3N1QedUfQeBXpdUJfjTOAo" target="_blank"><span class="track-name">Girls</span></a></div>
+          <div class="track-item"><span class="track-num">5</span><a class="track-link" href="https://open.spotify.com/track/3cz6ekoyJR7X2uUSdmmQor" target="_blank"><span class="track-name">I'd die for her</span></a></div>
+          <div class="track-item"><span class="track-num">6</span><a class="track-link" href="https://open.spotify.com/track/7g4R7JXhGimyjPHov106GA" target="_blank"><span class="track-name">I'd kill for her</span></a></div>
+          <div class="track-item"><span class="track-num">7</span><a class="track-link" href="https://open.spotify.com/track/2H8GEsotaZ3nI5Zo7sRTqk" target="_blank"><span class="track-name">Love</span></a></div>
+          <div class="track-item"><span class="track-num">8</span><a class="track-link" href="https://open.spotify.com/track/1Oh8ziVMi5nt6AgwaFEz4i" target="_blank"><span class="track-name">Redemption</span></a></div>
+          <div class="track-item"><span class="track-num">9</span><a class="track-link" href="https://open.spotify.com/track/5ReB7jdd050PQSHRiXplL2" target="_blank"><span class="track-name">She's my angel</span></a></div>
+          <div class="track-item"><span class="track-num">10</span><a class="track-link" href="https://open.spotify.com/track/3MzCaLsoUJGXCGoEfdbFVa" target="_blank"><span class="track-name">Welcome To The Dark Brotherhood</span></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schizo -->
+    <div class="album-card">
+      <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b2736b72c9488d853084e1f78afe" alt="Schizo">
+      <div class="album-info">
+        <p class="album-type">Single</p>
+        <h3 class="album-name">Schizo</h3>
+        <p class="album-year">2026 &nbsp;·&nbsp; 1 track</p>
+        <div class="track-list">
+          <div class="track-item"><span class="track-num">1</span><a class="track-link" href="https://open.spotify.com/album/28NbieNHyvHcwzn2WtQds4" target="_blank"><span class="track-name">Schizo</span></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emo Girl upcoming placeholder -->
+    <div class="album-card">
+      <img class="album-art" src="ChatGPT_Image_Mar_21__2026__04_21_35_PM-3000x3000.png" alt="Emo Girl EP">
+      <div class="album-info">
+        <p class="album-type" style="color: var(--purple-glow);">EP &nbsp;·&nbsp; Coming Soon</p>
+        <h3 class="album-name">Emo Girl</h3>
+        <p class="album-year">April 29, 2026</p>
+        <div class="track-list">
+          <div class="track-item">
+            <span class="track-num">1</span>
+            <span class="track-name" style="color:#555; font-style:italic;">Emo Girl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MEMBERS -->
+<section id="members">
+  <p class="section-label">The Band</p>
+  <h2 class="section-title">Members</h2>
+
+  <div class="members-grid">
+    <div class="member-card">
+      <div class="member-avatar">C</div>
+      <h3 class="member-name">CJ</h3>
+      <p class="member-role">Death.Syndicate</p>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">H</div>
+      <h3 class="member-name">Hax</h3>
+      <p class="member-role">Death.Syndicate</p>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">T</div>
+      <h3 class="member-name">Trent</h3>
+      <p class="member-role">Death.Syndicate</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Death.Syndicate</p>
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/0lt7yivQzmpsdcZ8wKuv2M" target="_blank">Spotify</a>
+  </div>
+  <p class="footer-copy">© 2026 Death.Syndicate · Hax Skating</p>
+  <p class="footer-copy">© Pagoni Hax Codes LLC</p>
+</footer>
+
+<script>
+  // Countdown to April 29, 2026
+  const target = new Date('2026-04-29T00:00:00');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
