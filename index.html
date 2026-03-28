@@ -548,6 +548,42 @@
     margin: 0;
   }
 
+  /* ── LINKS ── */
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--gray);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--bone);
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+
+  .link-card:hover {
+    background: rgba(192,57,43,0.1);
+    border-color: rgba(192,57,43,0.4);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(192,57,43,0.15);
+  }
+
+  .link-arrow {
+    margin-left: auto;
+    opacity: 0.3;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+
+  .link-card:hover .link-arrow {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+
   /* responsive */
   @media (max-width: 768px) {
     .ep-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -576,49 +612,76 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#upcoming">Upcoming</a>
+  <a href="#links">Links</a>
   <a href="#discography">Music</a>
   <a href="#members">Members</a>
 </nav>
 
 <div class="divider"></div>
 
-<!-- UPCOMING EP -->
-<div id="upcoming">
-  <div class="ep-inner">
-    <div class="ep-art">
-      <span class="ep-badge">Coming Soon</span>
-      <img src="emo-girl.png" alt="Emo Girl EP Cover">
-    </div>
-    <div class="ep-info">
-      <p class="section-label">Upcoming EP</p>
-      <h2 class="ep-title">Emo Girl</h2>
-      <p class="ep-date">April 29, 2026</p>
-      <p class="ep-desc">
-        The next chapter from Death.Syndicate. Dark, raw, and emotionally charged
-        <em>Emo Girl</em> is coming.
-      </p>
-      <div class="countdown">
-        <div class="cd-block">
-          <span class="cd-num" id="cd-days">--</span>
-          <span class="cd-label">Days</span>
-        </div>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-hours">--</span>
-          <span class="cd-label">Hours</span>
-        </div>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-mins">--</span>
-          <span class="cd-label">Mins</span>
-        </div>
-        <div class="cd-block">
-          <span class="cd-num" id="cd-secs">--</span>
-          <span class="cd-label">Secs</span>
-        </div>
-      </div>
-    </div>
+<!-- LINKS -->
+<section id="links">
+  <p class="section-label">Find Us</p>
+  <h2 class="section-title">Links</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;">
+
+    <a href="https://open.spotify.com/artist/0lt7yivQzmpsdcZ8wKuv2M" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      <span>Spotify</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://music.apple.com/us/album/1887090421" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.1.958 1.31 1.88.906 3.094c-.19.558-.27 1.137-.3 1.72-.014.25-.02.5-.022.75V18.44c.002.234.01.468.02.7.06 1.15.275 2.226.9 3.187.62.953 1.485 1.57 2.54 1.904.57.175 1.155.254 1.75.29.255.015.51.022.764.023h13.52c.25-.002.5-.01.75-.023.59-.036 1.172-.115 1.74-.29 1.052-.334 1.917-.95 2.54-1.902.623-.953.835-2.024.896-3.17.014-.237.02-.475.022-.712V6.874c-.002-.25-.008-.5-.02-.75zM17 15.667c0 .36-.015.719-.05 1.08-.057.648-.254 1.247-.657 1.772-.402.518-.937.83-1.576.928-.287.042-.575.058-.862.058H10.14c-.287 0-.575-.016-.862-.058-.639-.098-1.174-.41-1.576-.928-.403-.525-.6-1.124-.657-1.772A13.64 13.64 0 017 15.667V8.333c0-.36.015-.719.05-1.08.057-.648.254-1.247.657-1.772.402-.518.937-.83 1.576-.928.287-.042.575-.058.862-.058h3.715c.287 0 .575.016.862.058.639.098 1.174.41 1.576.928.403.525.6 1.124.657 1.772.035.361.05.72.05 1.08v7.334z"/></svg>
+      <span>Apple Music</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://music.amazon.com/artists/B0GK2QW9XC/death-syndicate" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705a.659.659 0 01-.75.074c-1.056-.876-1.243-1.284-1.822-2.12-1.742 1.776-2.976 2.308-5.236 2.308-2.675 0-4.754-1.65-4.754-4.956 0-2.58 1.401-4.337 3.397-5.196 1.731-.762 4.149-.897 5.998-1.107v-.412c0-.757.06-1.651-.385-2.306-.385-.583-1.124-.824-1.778-.824-1.206 0-2.282.619-2.545 1.903-.054.285-.261.567-.549.581l-3.061-.333c-.259-.056-.548-.266-.472-.66C5.982 2.498 9.037 1.5 11.76 1.5c1.39 0 3.209.37 4.307 1.42 1.394 1.3 1.261 3.038 1.261 4.927v4.462c0 1.341.556 1.93 1.079 2.656.181.259.221.569-.01.762l-1.253 1.068zm3.559 1.988C18.693 21.77 15.138 23 11.974 23 7.4 23 3.296 21.25.542 18.34c-.23-.26-.025-.613.283-.41 3.013 1.753 6.737 2.806 10.588 2.806 2.603 0 5.461-.539 8.094-1.657.396-.169.73.26.396.704zm.902-2.058c-.315-.404-2.079-.191-2.871-.096-.24.029-.277-.18-.06-.334 1.405-.988 3.712-.703 3.981-.372.271.334-.072 2.64-1.392 3.741-.202.17-.395.079-.306-.144.298-.741.962-2.401.648-2.795z"/></svg>
+      <span>Amazon Music</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://www.deezer.com/en/artist/370075742" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.81 11.845H24v2.31h-5.19zm0-3.923H24v2.31h-5.19zM18.81 4H24v2.31h-5.19zm0 11.768H24v2.31h-5.19zM12.18 15.768h5.19v2.31h-5.19zm0-3.923h5.19v2.31h-5.19zm0-3.923h5.19v2.31h-5.19zM5.55 15.768h5.19v2.31H5.55zm0-3.923h5.19v2.31H5.55zM0 15.768h5.19v2.31H0z"/></svg>
+      <span>Deezer</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://tidal.com/artist/73657314" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004 4.004-4.004 4.004 4.004 4.004-4.004zM8.008 16.004l4.004-4.004 4.004 4.004 4.004-4.004-4.004-4.004-4.004 4.004-4.004-4.004-4.004 4.004z"/></svg>
+      <span>Tidal</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://www.shazam.com/artist/deathsyndicate/1872450168" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.73 17.708c-1.888 0-3.335-.9-4.148-2.118l1.574-1.574c.567.827 1.402 1.39 2.574 1.39 1.05 0 1.728-.495 1.728-1.26 0-.84-.602-1.184-1.98-1.664C9.28 11.79 7.9 10.98 7.9 9.09c0-1.77 1.38-3.045 3.45-3.045 1.62 0 2.88.72 3.675 1.8L13.5 9.39c-.525-.735-1.2-1.17-2.1-1.17-.93 0-1.5.435-1.5 1.11 0 .765.57 1.08 1.98 1.575 1.755.6 3.27 1.38 3.27 3.345 0 1.92-1.5 3.458-3.88 3.458z"/></svg>
+      <span>Shazam</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://discord.gg/UjhMSnWWsQ" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      <span>Discord (Hax)</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://www.instagram.com/cjskates999/" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      <span>Instagram (CJ)</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
+    <a href="https://www.instagram.com/lostpunk1/" target="_blank" class="link-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      <span>Instagram (Trent)</span>
+      <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+
   </div>
-</div>
+</section>
 
 <div class="divider"></div>
 
@@ -686,6 +749,30 @@
             <span style="font-size:0.7rem;color:#444;letter-spacing:0.05em;">2:12</span>
           </div>
         </div>
+        <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(192,57,43,0.15);">
+          <p style="font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;">Dropping In</p>
+          <div style="display:flex;gap:0.6rem;">
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;" id="lis-days">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Days</div>
+            </div>
+            <div style="color:var(--muted);font-size:1rem;padding-top:2px;">:</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;" id="lis-hours">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Hrs</div>
+            </div>
+            <div style="color:var(--muted);font-size:1rem;padding-top:2px;">:</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;" id="lis-mins">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Mins</div>
+            </div>
+            <div style="color:var(--muted);font-size:1rem;padding-top:2px;">:</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#c0392b;" id="lis-secs">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Secs</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -700,6 +787,30 @@
           <div class="track-item">
             <span class="track-num">1</span>
             <span class="track-name" style="color:#555; font-style:italic;">Emo Girl</span>
+          </div>
+        </div>
+        <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(123,45,139,0.2);">
+          <p style="font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--purple-glow);margin-bottom:0.5rem;">Dropping In</p>
+          <div style="display:flex;gap:0.6rem;">
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;" id="eg-days">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Days</div>
+            </div>
+            <div style="color:var(--muted);font-size:1rem;padding-top:2px;">:</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;" id="eg-hours">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Hrs</div>
+            </div>
+            <div style="color:var(--muted);font-size:1rem;padding-top:2px;">:</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;" id="eg-mins">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Mins</div>
+            </div>
+            <div style="color:var(--muted);font-size:1rem;padding-top:2px;">:</div>
+            <div style="text-align:center;">
+              <div style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--purple-glow);" id="eg-secs">--</div>
+              <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Secs</div>
+            </div>
           </div>
         </div>
       </div>
@@ -755,31 +866,38 @@
 </footer>
 
 <script>
-  // Countdown to April 29, 2026
-  const target = new Date('2026-04-29T00:00:00');
 
-  function updateCountdown() {
-    const now = new Date();
-    const diff = target - now;
+  // LIS countdown — 7 days from release (2026-03-27)
+  const lisTarget = new Date('2026-04-03T00:00:00');
+  function updateLIS() {
+    const diff = lisTarget - new Date();
     if (diff <= 0) {
-      document.getElementById('cd-days').textContent = '00';
-      document.getElementById('cd-hours').textContent = '00';
-      document.getElementById('cd-mins').textContent = '00';
-      document.getElementById('cd-secs').textContent = '00';
+      ['lis-days','lis-hours','lis-mins','lis-secs'].forEach(id => document.getElementById(id).textContent = '00');
       return;
     }
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins = Math.floor((diff % 3600000) / 60000);
-    const secs = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+    document.getElementById('lis-days').textContent  = String(Math.floor(diff / 86400000)).padStart(2,'0');
+    document.getElementById('lis-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    document.getElementById('lis-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+    document.getElementById('lis-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
   }
+  updateLIS();
+  setInterval(updateLIS, 1000);
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  // Emo Girl discography card countdown
+  const egTarget = new Date('2026-04-29T00:00:00');
+  function updateEG() {
+    const diff = egTarget - new Date();
+    if (diff <= 0) {
+      ['eg-days','eg-hours','eg-mins','eg-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    document.getElementById('eg-days').textContent  = String(Math.floor(diff / 86400000)).padStart(2,'0');
+    document.getElementById('eg-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    document.getElementById('eg-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+    document.getElementById('eg-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  }
+  updateEG();
+  setInterval(updateEG, 1000);
 </script>
 </body>
 </html>
