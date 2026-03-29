@@ -4,7 +4,6 @@ const SPOTIFY_ARTIST_ID     = '0lt7yivQzmpsdcZ8wKuv2M';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-
   try {
     const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -13,15 +12,12 @@ export default async function handler(req, res) {
     });
     const tokenData = await tokenRes.json();
     if (!tokenData.access_token) throw new Error('Token error: ' + JSON.stringify(tokenData));
-    const token = tokenData.access_token;
-    const headers = { Authorization: `Bearer ${token}` };
+    const headers = { Authorization: `Bearer ${tokenData.access_token}` };
 
-    const [artistRes, albumsRes] = await Promise.all([
-      fetch(`https://api.spotify.com/v1/artists/${SPOTIFY_ARTIST_ID}`, { headers }),
-      fetch(`https://api.spotify.com/v1/artists/${SPOTIFY_ARTIST_ID}/albums?include_groups=album,single,ep&market=US&limit=50`, { headers })
-    ]);
-
-    const artist = await artistRes.json();
+    const albumsRes = await fetch(
+      `https://api.spotify.com/v1/artists/${SPOTIFY_ARTIST_ID}/albums?include_groups=album,single,ep&market=US&limit=50`,
+      { headers }
+    );
     const albumsData = await albumsRes.json();
 
     const releases = await Promise.all(
@@ -49,12 +45,7 @@ export default async function handler(req, res) {
     );
 
     releases.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-
-    res.status(200).json({
-      followers: artist.followers?.total ?? 0,
-      popularity: artist.popularity ?? 0,
-      releases
-    });
+    res.status(200).json({ releases });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
