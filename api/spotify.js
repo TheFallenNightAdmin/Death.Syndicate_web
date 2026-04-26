@@ -1,1 +1,31 @@
-function _0x5230(){const _0x528b40=['https://api.spotify.com/v1/albums/','10HIOeEe','1548903pvayNR','application/x-www-form-urlencoded','0lt7yivQzmpsdcZ8wKuv2M','external_urls','grant_type=client_credentials&client_id=','album_type','105mDrtrl','sort','track_number','setHeader','followers','spotify','490596EhMduF','access_token','26CkYgcX','Token\x20error:\x20','https://api.spotify.com/v1/artists/','release_date','36834NXDonj','message','total','status','/albums?include_groups=album,single,ep&market=US&limit=50','3101300GGrGuR','releaseDate','url','all','Bearer\x20','1094375FQMTBO','8507277FjAjut','/tracks?limit=50','name','popularity','stringify','duration_ms','images','json','6859224ydSBKa','&client_secret=','items'];_0x5230=function(){return _0x528b40;};return _0x5230();}const _0x56d73a=_0x4f7f;(function(_0x2f1927,_0x6d2b1c){const _0x1a09fc=_0x4f7f,_0x22709d=_0x2f1927();while(!![]){try{const _0x2a720c=parseInt(_0x1a09fc(0xf7))/0x1*(-parseInt(_0x1a09fc(0xf3))/0x2)+-parseInt(_0x1a09fc(0xe5))/0x3+parseInt(_0x1a09fc(0xfc))/0x4+-parseInt(_0x1a09fc(0xd7))/0x5+parseInt(_0x1a09fc(0xf1))/0x6*(parseInt(_0x1a09fc(0xeb))/0x7)+parseInt(_0x1a09fc(0xe0))/0x8+-parseInt(_0x1a09fc(0xd8))/0x9*(parseInt(_0x1a09fc(0xe4))/0xa);if(_0x2a720c===_0x6d2b1c)break;else _0x22709d['push'](_0x22709d['shift']());}catch(_0x34a8f2){_0x22709d['push'](_0x22709d['shift']());}}}(_0x5230,0xaae2b));const SPOTIFY_CLIENT_ID=process.env.SPOTIFY_CLIENT_ID,SPOTIFY_CLIENT_SECRET=process.env.SPOTIFY_CLIENT_SECRET,SPOTIFY_ARTIST_ID=_0x56d73a(0xe7);function _0x4f7f(_0x456c1c,_0x4a53aa){_0x456c1c=_0x456c1c-0xd5;const _0x5230be=_0x5230();let _0x4f7ff5=_0x5230be[_0x456c1c];return _0x4f7ff5;}export default async function handler(_0x12434b,_0x214f5a){const _0x1eb62d=_0x56d73a;_0x214f5a[_0x1eb62d(0xee)]('Access-Control-Allow-Origin','*');try{const _0x4e3408=await fetch('https://accounts.spotify.com/api/token',{'method':'POST','headers':{'Content-Type':_0x1eb62d(0xe6)},'body':_0x1eb62d(0xe9)+SPOTIFY_CLIENT_ID+_0x1eb62d(0xe1)+SPOTIFY_CLIENT_SECRET}),_0x348a5e=await _0x4e3408['json']();if(!_0x348a5e['access_token'])throw new Error(_0x1eb62d(0xf4)+JSON[_0x1eb62d(0xdc)](_0x348a5e));const _0x590ec6={'Authorization':_0x1eb62d(0xd6)+_0x348a5e[_0x1eb62d(0xf2)]},_0x1ef326=await fetch(_0x1eb62d(0xf5)+SPOTIFY_ARTIST_ID,{'headers':_0x590ec6}),_0x5af04b=await _0x1ef326['json'](),_0x3ba9a4=await fetch('https://api.spotify.com/v1/artists/'+SPOTIFY_ARTIST_ID+_0x1eb62d(0xfb),{'headers':_0x590ec6}),_0x4ea008=await _0x3ba9a4[_0x1eb62d(0xdf)](),_0x599fdc=await Promise[_0x1eb62d(0xd5)]((_0x4ea008[_0x1eb62d(0xe2)]||[])['map'](async _0x46ff9d=>{const _0x3491ad=_0x1eb62d,_0x38eb2=await fetch(_0x3491ad(0xe3)+_0x46ff9d['id']+_0x3491ad(0xd9),{'headers':_0x590ec6}),_0x5cf3f5=await _0x38eb2[_0x3491ad(0xdf)]();return{'id':_0x46ff9d['id'],'name':_0x46ff9d['name'],'type':_0x46ff9d[_0x3491ad(0xea)],'releaseDate':_0x46ff9d[_0x3491ad(0xf6)],'image':_0x46ff9d[_0x3491ad(0xde)]?.[0x0]?.[_0x3491ad(0xfe)]||null,'url':_0x46ff9d[_0x3491ad(0xe8)]?.[_0x3491ad(0xf0)],'totalTracks':_0x46ff9d['total_tracks'],'tracks':(_0x5cf3f5['items']||[])['map'](_0x3c50e4=>({'num':_0x3c50e4[_0x3491ad(0xed)],'name':_0x3c50e4[_0x3491ad(0xda)],'url':_0x3c50e4[_0x3491ad(0xe8)]?.[_0x3491ad(0xf0)],'duration':_0x3c50e4[_0x3491ad(0xdd)]}))};}));_0x599fdc[_0x1eb62d(0xec)]((_0x3dbfa8,_0x59ce67)=>new Date(_0x59ce67[_0x1eb62d(0xfd)])-new Date(_0x3dbfa8[_0x1eb62d(0xfd)])),_0x214f5a['status'](0xc8)[_0x1eb62d(0xdf)]({'followers':_0x5af04b[_0x1eb62d(0xef)]?.[_0x1eb62d(0xf9)]??0x0,'popularity':_0x5af04b[_0x1eb62d(0xdb)]??0x0,'releases':_0x599fdc});}catch(_0x33edcd){_0x214f5a[_0x1eb62d(0xfa)](0x1f4)['json']({'error':_0x33edcd[_0x1eb62d(0xf8)]});}}
+const SPOTIFY_CLIENT_ID     = process.env.SPOTIFY_CLIENT_ID;
+const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+const SPOTIFY_ARTIST_ID     = '0lt7yivQzmpsdcZ8wKuv2M';
+
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  try {
+    const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: SPOTIFY_CLIENT_ID,
+        client_secret: SPOTIFY_CLIENT_SECRET
+      })
+    });
+    const tokenData = await tokenRes.json();
+    if (!tokenData.access_token) throw new Error('Token error: ' + JSON.stringify(tokenData));
+
+    const artistRes = await fetch(
+      `https://api.spotify.com/v1/artists/${SPOTIFY_ARTIST_ID}`,
+      { headers: { Authorization: `Bearer ${tokenData.access_token}` } }
+    );
+    const artistData = await artistRes.json();
+    if (artistData.error) throw new Error(artistData.error.message);
+
+    res.status(200).json({ followers: artistData.followers?.total ?? 0 });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+}
