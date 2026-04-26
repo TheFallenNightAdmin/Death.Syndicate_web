@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   try {
-    const response = await fetch(`https://discord.com/api/v10/invites/UjhMSnWWsQ?with_counts=true`);
+    const response = await fetch(`https://discord.com/api/v10/invites/vhDUn3emsw?with_counts=true`);
     const data = await response.json();
 
     res.status(200).json({
