@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Death.Syndicate</title>
 <link rel="icon" href="favicon.ico">
@@ -687,7 +690,6 @@
   <h2 class="section-title">Discography</h2>
   <div class="disc-grid">
 
-    <!-- Chaos Reworked -->
     <div class="album-card">
       <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b273ce8e26b8ec037aa69d6c39a9" alt="Chaos Reworked">
       <div class="album-info">
@@ -709,7 +711,6 @@
       </div>
     </div>
 
-    <!-- Schizo -->
     <div class="album-card">
       <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b2736b72c9488d853084e1f78afe" alt="Schizo">
       <div class="album-info">
@@ -722,7 +723,6 @@
       </div>
     </div>
 
-    <!-- Left In Silence -->
     <div class="album-card">
       <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b27383f8343d8d6dc08273ec1d87" alt="Left In Silence">
       <div class="album-info">
@@ -735,7 +735,6 @@
       </div>
     </div>
 
-    <!-- Take Me Back To Myrtle Beach -->
     <div class="album-card">
       <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b273762e151606cfd82b2a5cdf07" alt="Take Me Back To Myrtle Beach">
       <div class="album-info">
@@ -748,7 +747,6 @@
       </div>
     </div>
 
-    <!-- Emo Girl -->
     <div class="album-card">
       <img class="album-art" src="emo-girl.png" alt="Emo Girl EP">
       <div class="album-info">
@@ -826,18 +824,19 @@
   updateEG();
   setInterval(updateEG, 1000);
 
-  // Discord live member count
+  // Discord live member count — falls back gracefully if /api/discord not set up
   async function fetchDiscord() {
+    const el = document.getElementById('dc-members');
     try {
-      const res = await fetch('/api/discord');
+      const res = await fetch('/api/discord', { cache: 'no-store' });
+      if (!res.ok) throw new Error('no api');
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      const el = document.getElementById('dc-members');
       el.textContent = data.members;
       el.classList.remove('loading');
     } catch(e) {
-      const el = document.getElementById('dc-members');
-      el.textContent = '121';
+      // No API route set up — show static fallback
+      el.textContent = '—';
       el.classList.remove('loading');
     }
   }
