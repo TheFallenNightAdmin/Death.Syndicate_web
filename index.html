@@ -516,25 +516,6 @@
     <h2 style="font-family:'Cinzel Decorative',serif;font-size:clamp(1.4rem,3vw,2.2rem);color:#fff;text-align:center;margin-bottom:3rem;letter-spacing:0.05em;">Upcoming Releases</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;align-items:start;">
 
-      <!-- You're Mine -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;">
-        <div class="ep-art">
-          <span class="ep-badge">May 1</span>
-          <img src="youre-mine.png" alt="You're Mine Cover" style="box-shadow:0 0 80px rgba(192,57,43,0.6),0 0 160px rgba(192,57,43,0.3);animation:pulseRed2 4s ease-in-out infinite;">
-        </div>
-        <div class="ep-info">
-          <p class="section-label" style="color:var(--red);">Upcoming Single</p>
-          <h2 class="ep-title" style="font-size:clamp(1.1rem,2.5vw,1.8rem);text-shadow:0 0 40px rgba(192,57,43,0.5);">You're Mine</h2>
-          <p class="ep-date" style="color:var(--red);font-size:0.95rem;">May 1, 2026</p>
-          <div class="countdown" style="gap:0.6rem;margin-top:1rem;">
-            <div class="cd-block"><span class="cd-num" id="cd0-days" style="color:var(--red);font-size:1.3rem;">--</span><span class="cd-label">Days</span></div>
-            <div class="cd-block"><span class="cd-num" id="cd0-hours" style="color:var(--red);font-size:1.3rem;">--</span><span class="cd-label">Hrs</span></div>
-            <div class="cd-block"><span class="cd-num" id="cd0-mins" style="color:var(--red);font-size:1.3rem;">--</span><span class="cd-label">Min</span></div>
-            <div class="cd-block"><span class="cd-num" id="cd0-secs" style="color:var(--red);font-size:1.3rem;">--</span><span class="cd-label">Sec</span></div>
-          </div>
-        </div>
-      </div>
-
       <!-- Gives You Hell -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;">
         <div class="ep-art">
@@ -845,7 +826,7 @@
     <div class="album-card">
       <img class="album-art" src="youre-mine.png" alt="You're Mine">
       <div class="album-info">
-        <p class="album-type" style="color:var(--red);">Single &nbsp;·&nbsp; Coming Soon</p>
+        <p class="album-type">Single</p>
         <h3 class="album-name">You're Mine</h3>
         <p class="album-year">May 1, 2026 &nbsp;·&nbsp; 1 track</p>
         <div class="track-list">
@@ -957,13 +938,10 @@
     ];
     ids.forEach((id, i) => { const el = document.getElementById(id); if(el) el.textContent = String(vals[i]).padStart(2,'0'); });
   }
-
-  const ym  = new Date('2026-05-03T00:00:00');
   const gyh = new Date('2026-05-15T00:00:00');
   const nl  = new Date('2026-05-16T00:00:00');
 
   function tick() {
-    updateCountdown(ym,  ['cd0-days','cd0-hours','cd0-mins','cd0-secs']);
     updateCountdown(gyh, ['cd1-days','cd1-hours','cd1-mins','cd1-secs']);
     updateCountdown(nl,  ['cd2-days','cd2-hours','cd2-mins','cd2-secs']);
   }
